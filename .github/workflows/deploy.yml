@@ -3,7 +3,7 @@ name: Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - main # Или другая ветка, из которой хочешь деплоить
+      - master
 
 permissions:
   contents: write
