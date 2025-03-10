@@ -14,7 +14,7 @@ export interface Dot {
 }
 
 export const generateDots = (canvas: HTMLCanvasElement, colors: ThemeColors, spacing: number): Dot[] => {
-  const horizonY = (canvas.height * 2) / 3;
+  const horizonY = (canvas.height * 2) / 3.4;
   const dots: Dot[] = [];
   for (let x = -canvas.width / 2; x < canvas.width / 2; x += spacing) {
     for (let z = 100; z > 1; z -= 2) {
@@ -76,15 +76,15 @@ export const drawGridLines = (
   const lineSpacing = 44; // Увеличенное расстояние между линиями
 
   for (let i = -sunRadius; i <= sunRadius; i += lineSpacing) {
-    const lineY = -canvas.height / 4 + i + lineOffset;
+    const lineY = -canvas.height / 6 + i + lineOffset;
     const relativeHeight = (lineY + canvas.height / 2) / canvas.height; // Нормализованная высота
-    const lineWidth = 0.1 + relativeHeight * 40; // Минимальная толщина 0.1, максимальная 30
+    const lineWidth = 0.1 + relativeHeight * 110; // Минимальная толщина 0.1, максимальная 30
 
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = gradient;
     ctx.beginPath();
-    ctx.moveTo(-sunRadius * 1.5, lineY);
-    ctx.lineTo(sunRadius * 1.5, lineY);
+    ctx.moveTo(-sunRadius * 1.5, lineY+130);
+    ctx.lineTo(sunRadius * 1.5, lineY+130);
     ctx.stroke();
   }
   return (lineOffset + 0.5) % lineSpacing;

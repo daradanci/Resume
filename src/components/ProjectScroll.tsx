@@ -16,15 +16,30 @@ export default function ProjectScroll() {
     const maskImage = useScrollOverflowMask(scrollXProgress);
     const colors = themeColors[themeMode] || themeColors.dark;
 
+    const scroll = (direction: "left" | "right") => {
+        if (ref.current) {
+            const scrollAmount = 220;
+            ref.current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+        }
+    };
+
     return (
         <div id="projects">
+            <button className="scroll-btn left" onClick={() => scroll("left")}>&larr;</button>
             <motion.ul ref={ref} style={{ maskImage }}>
                 {colors.map((color, index) => (
-                    <motion.li key={index} style={{ background: color }}>
+                    <motion.li
+                        key={index}
+                        style={{ background: color }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
                         {`Проект ${index + 1}`}
                     </motion.li>
                 ))}
             </motion.ul>
+            <button className="scroll-btn right" onClick={() => scroll("right")}>&rarr;</button>
             <StyleSheet />
         </div>
     );
@@ -39,27 +54,19 @@ const opaque = `#000`;
 
 function useScrollOverflowMask(scrollXProgress: MotionValue<number>) {
     const maskImage = useMotionValue(
-        `linear-gradient(90deg, ${opaque}, ${opaque} ${left}, ${opaque} ${rightInset}, ${transparent})`
+        `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0.7) 85%, rgba(0, 0, 0, 0) 100%)`
     );
 
     useMotionValueEvent(scrollXProgress, "change", (value) => {
         if (value === 0) {
             animate(
                 maskImage,
-                `linear-gradient(90deg, ${opaque}, ${opaque} ${left}, ${opaque} ${rightInset}, ${transparent})`
+                `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0.7) 85%, rgba(0, 0, 0, 0) 100%)`
             );
         } else if (value === 1) {
             animate(
                 maskImage,
-                `linear-gradient(90deg, ${transparent}, ${opaque} ${leftInset}, ${opaque} ${right}, ${opaque})`
-            );
-        } else if (
-            scrollXProgress.getPrevious() === 0 ||
-            scrollXProgress.getPrevious() === 1
-        ) {
-            animate(
-                maskImage,
-                `linear-gradient(90deg, ${transparent}, ${opaque} ${leftInset}, ${opaque} ${rightInset}, ${transparent})`
+                `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 15%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0.7) 85%, rgba(0, 0, 0, 0) 100%)`
             );
         }
     });
@@ -72,11 +79,11 @@ function StyleSheet() {
         <style>{`
             #projects {
                 width: 100vw;
-                max-width: 600px;
+                width: 1400px;
                 margin: 0 auto;
                 overflow: hidden;
                 position: relative;
-                padding: 20px 0;
+                padding: 20px 50px; 
             }
 
             #projects ul {
@@ -88,6 +95,7 @@ function StyleSheet() {
                 gap: 20px;
                 scrollbar-width: none;
                 -ms-overflow-style: none;
+                scroll-snap-type: x mandatory;
             }
 
             #projects ul::-webkit-scrollbar {
@@ -105,6 +113,56 @@ function StyleSheet() {
                 color: white;
                 border-radius: 12px;
                 padding: 20px;
+                scroll-snap-align: center;
+                transition: transform 0.3s ease;
+            }
+
+            #projects li:hover {
+                transform: scale(1.05);
+            }
+
+            .scroll-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                cursor: pointer;
+                padding: 10px;
+                font-size: 24px;
+                border-radius: 50%;
+                transition: background 0.3s ease;
+                z-index: 10;
+            }
+
+
+            .scroll-btn:hover {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .scroll-btn.left {
+                left: -20px;
+            }
+
+            .scroll-btn.right {
+                right: 20px;
+            }
+
+            @media (max-width: 600px) {
+                #projects ul {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    overflow: visible;
+                }
+
+                #projects li {
+                    flex: 0 0 calc(50% - 20px);
+                }
+
+                .scroll-btn {
+                    display: none;
+                }
             }
         `}</style>
     );

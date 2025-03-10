@@ -7,6 +7,7 @@ import darkAvatar from "../images/avas/ava_d_who.jpg"; // Темная тема
 import blueAvatar from "../images/avas/ava_cat.jpg"; // Дополнительная тема
 import greenAvatar from "../images/avas/ava_dog.jpg"; // Дополнительная тема
 import ProjectScroll from "../components/ProjectScroll";
+import ProjectList from "../components/ProjectList";
 
 export default function Home() {
   const themeContext = useContext(ThemeContext);
@@ -54,13 +55,18 @@ export default function Home() {
             alt="Avatar"
             width={150}
             height={150}
-            style={{ borderRadius: "50%", marginBottom: 16 }}
+            style={{ borderRadius: "50%", marginBottom: 16, userSelect: "none" }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             drag
             dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
             whileDrag={{ scale: 0.9, rotate: 10 }}
+            ref={(el) => {
+              if (el) {
+                (el.style as CSSStyleDeclaration & { webkitUserDrag?: string }).webkitUserDrag = "none";
+              }
+            }}
         />
         </motion.button>
 
@@ -82,7 +88,8 @@ export default function Home() {
         </Paper>
       </motion.div>
       <Box>
-      <ProjectScroll/>
+      {/* <ProjectScroll/> */}
+      <ProjectList/>
 
       </Box>
     {/* </Box> */}
