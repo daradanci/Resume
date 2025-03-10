@@ -1,20 +1,12 @@
 import { useEffect, useRef, useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import { updateSun, drawGridLines, generateDots, updateDots } from "../../utils/sunAndGrid";
-
-interface Dot {
-  x: number;
-  y: number;
-  radius: number;
-  color: string;
-  velocity: { x: number; y: number };
-}
+import { updateSun, drawGridLines, generateDots, updateDots, Dot } from "../../utils/sunAndGrid";
 
 export default function RetroWave() {
   const { themeMode } = useContext(ThemeContext)!;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   let lineOffset = 0;
-  let dots: Dot[] = []; // ✅ Теперь dots имеет явный тип
+  let dots: Dot[] = []; // ✅ Теперь dots имеет правильный импортированный тип
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,7 +26,7 @@ export default function RetroWave() {
     };
 
     const colors = themeColors[themeMode] || themeColors.dark;
-    dots = generateDots(canvas, colors, 25) as Dot[]; // ✅ Приведение типа к Dot[]
+    dots = generateDots(canvas, colors, 25); // ✅ Теперь dots имеет правильный тип
 
     const drawScene = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -59,7 +51,7 @@ export default function RetroWave() {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      dots = generateDots(canvas, colors, 25) as Dot[]; // ✅ Приведение типа
+      dots = generateDots(canvas, colors, 25); // ✅ Без приведения типа
     };
 
     resizeCanvas();
