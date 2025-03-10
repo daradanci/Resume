@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 export default function App() {
   return (
     <ThemeProviderWrapper>
-      <Router basename="/repository-name">
+      <Router basename="/Resume">
         <AnimatedBackground />
         <ThemeToggle />
         <Routes>
