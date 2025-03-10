@@ -2,7 +2,7 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 import { ThemeProvider, createTheme, Theme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-// Типы для темы и контекста
+// Типы для темы и фона
 type ThemeMode = "light" | "dark" | "blue" | "green";
 type BackgroundMode = "retro" | "dots" | "dots_moving" | "floating" | "cube";
 
@@ -32,12 +32,21 @@ const themes: Record<ThemeMode, Theme> = {
   }),
 };
 
+// Функция для получения корректных значений из localStorage
+const getStoredTheme = (): ThemeMode => {
+  const storedTheme = localStorage.getItem("theme") as ThemeMode;
+  return ["light", "dark", "blue", "green"].includes(storedTheme) ? storedTheme : "light";
+};
+
+const getStoredBackground = (): BackgroundMode => {
+  const storedBackground = localStorage.getItem("background") as BackgroundMode;
+  return ["retro", "dots", "dots_moving", "floating", "cube"].includes(storedBackground) ? storedBackground : "retro";
+};
+
 // Провайдер темы
 export function ThemeProviderWrapper({ children }: { children: ReactNode }) {
-  const storedTheme = (localStorage.getItem("theme") as ThemeMode) || "light";
-  const storedBackground = (localStorage.getItem("background") as BackgroundMode) || "dots";
-  const [themeMode, setThemeMode] = useState<ThemeMode>(storedTheme);
-  const [backgroundMode, setBackgroundMode] = useState<BackgroundMode>(storedBackground);
+  const [themeMode, setThemeMode] = useState<ThemeMode>(() => getStoredTheme());
+  const [backgroundMode, setBackgroundMode] = useState<BackgroundMode>(() => getStoredBackground());
 
   useEffect(() => {
     localStorage.setItem("theme", themeMode);
