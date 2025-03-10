@@ -1,0 +1,76 @@
+{
+  "hash": "efab1978",
+  "configHash": "eb5a2e05",
+  "lockfileHash": "56da436b",
+  "browserHash": "df8e6e13",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "85e78d45",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "1ee25d4c",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "5d19696e",
+      "needsInterop": true
+    },
+    "@mui/material/styles": {
+      "src": "../../node_modules/@mui/material/styles/index.js",
+      "file": "@mui_material_styles.js",
+      "fileHash": "2a01e254",
+      "needsInterop": false
+    },
+    "@mui/material/CssBaseline": {
+      "src": "../../node_modules/@mui/material/CssBaseline/index.js",
+      "file": "@mui_material_CssBaseline.js",
+      "fileHash": "5f3f184f",
+      "needsInterop": false
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "17063d8a",
+      "needsInterop": false
+    },
+    "framer-motion": {
+      "src": "../../node_modules/framer-motion/dist/es/index.mjs",
+      "file": "framer-motion.js",
+      "fileHash": "4feb32c8",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "d992cb95",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-HMVW6OXY": {
+      "file": "chunk-HMVW6OXY.js"
+    },
+    "chunk-AJAQAJEL": {
+      "file": "chunk-AJAQAJEL.js"
+    },
+    "chunk-AZJ3G37C": {
+      "file": "chunk-AZJ3G37C.js"
+    },
+    "chunk-YQLRJNIK": {
+      "file": "chunk-YQLRJNIK.js"
+    },
+    "chunk-XZR65GWF": {
+      "file": "chunk-XZR65GWF.js"
+    },
+    "chunk-UCZTVSZO": {
+      "file": "chunk-UCZTVSZO.js"
+    }
+  }
+}
