@@ -1,6 +1,4 @@
-"use client";
-
-import { animate, motion, useMotionValue, useMotionValueEvent, useScroll } from "framer-motion";
+import { animate, motion, useMotionValue, useMotionValueEvent, useScroll, MotionValue } from "framer-motion";
 import { useRef, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
@@ -9,10 +7,10 @@ const themeColors: Record<string, string[]> = {
     dark: ["#003366", "#0055aa", "#0077dd", "#0099ff", "#005588", "#001133"],
     blue: ["#001f3f", "#003366", "#004080", "#0055aa", "#0077dd", "#0099ff"],
     green: ["#004d00", "#006600", "#008000", "#22aa22", "#44cc44", "#66ff66"],
-  };
-  
+};
+
 export default function ProjectScroll() {
-    const ref = useRef(null);
+    const ref = useRef<HTMLUListElement | null>(null);
     const { themeMode } = useContext(ThemeContext)!;
     const { scrollXProgress } = useScroll({ container: ref });
     const maskImage = useScrollOverflowMask(scrollXProgress);
@@ -39,7 +37,7 @@ const rightInset = `80%`;
 const transparent = `#0000`;
 const opaque = `#000`;
 
-function useScrollOverflowMask(scrollXProgress) {
+function useScrollOverflowMask(scrollXProgress: MotionValue<number>) {
     const maskImage = useMotionValue(
         `linear-gradient(90deg, ${opaque}, ${opaque} ${left}, ${opaque} ${rightInset}, ${transparent})`
     );
