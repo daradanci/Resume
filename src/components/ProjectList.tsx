@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { Card, CardContent, Box, Typography, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import WebIcon from '@mui/icons-material/Web';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const projects = [

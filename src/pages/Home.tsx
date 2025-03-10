@@ -6,7 +6,6 @@ import lightAvatar from "../images/avas/ava_fuzzy.jpg"; // Светлая тем
 import darkAvatar from "../images/avas/ava_d_who.jpg"; // Темная тема
 import blueAvatar from "../images/avas/ava_cat.jpg"; // Дополнительная тема
 import greenAvatar from "../images/avas/ava_dog.jpg"; // Дополнительная тема
-import ProjectScroll from "../components/ProjectScroll";
 import ProjectList from "../components/ProjectList";
 
 export default function Home() {
