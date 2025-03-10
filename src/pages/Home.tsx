@@ -2,7 +2,7 @@ import { Typography, Paper, Box } from "@mui/material";
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { motion } from "framer-motion";
-import lightAvatar from "../images/avas/ava_dog.jpg"; // Светлая тема
+import lightAvatar from "../images/avas/ava_fuzzy.jpg"; // Светлая тема
 import darkAvatar from "../images/avas/ava_d_who.jpg"; // Темная тема
 import blueAvatar from "../images/avas/ava_cat.jpg"; // Дополнительная тема
 import greenAvatar from "../images/avas/ava_dog.jpg"; // Дополнительная тема
