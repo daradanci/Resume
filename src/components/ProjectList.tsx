@@ -88,10 +88,12 @@ const ProjectList = () => {
                     <Typography variant="body2" sx={{ marginBottom: "8px" }}>{project.stack.join(", ")}</Typography>
                     <Box display="flex" gap={1}>
                       <IconButton href={project.links.github} target="_blank" aria-label="GitHub" sx={{ color: themeColors[themeMode]?.color || themeColors.light.color }}>
-                        <GitHubIcon />
+                        <GitHubIcon sx={{mr:'6px'}}/>
+                        <Typography variant="body2" fontWeight="bold">GitHub</Typography>
                       </IconButton>
                       <IconButton href={project.links.demo} target="_blank" aria-label="Demo" sx={{ color: themeColors[themeMode]?.color || themeColors.light.color }}>
-                        <WebIcon />
+                        <WebIcon sx={{mr:'6px'}}/>
+                        <Typography variant="body2" fontWeight="bold">Сайт</Typography>
                       </IconButton>
                     </Box>
                   </CardContent>
