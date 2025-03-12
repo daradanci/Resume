@@ -13,10 +13,8 @@ interface ThemeContextType {
   setBackgroundMode: (mode: BackgroundMode) => void;
 }
 
-// Создаём контекст
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Определяем темы
 const themes: Record<ThemeMode, Theme> = {
   light: createTheme({
     palette: { mode: "light", primary: { main: "#1976d2" }, background: { default: "#ffffff" } },
@@ -32,7 +30,6 @@ const themes: Record<ThemeMode, Theme> = {
   }),
 };
 
-// Функция для получения корректных значений из localStorage
 const getStoredTheme = (): ThemeMode => {
   const storedTheme = localStorage.getItem("theme") as ThemeMode;
   return ["light", "dark", "blue", "green"].includes(storedTheme) ? storedTheme : "light";

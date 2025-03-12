@@ -9,7 +9,7 @@ export default function App() {
     <ThemeProviderWrapper>
       <Router basename="/Resume">
         <AnimatedBackground />
-        <ThemeToggle />
+        <ThemeToggle/>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
