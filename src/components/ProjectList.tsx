@@ -75,6 +75,7 @@ const ProjectList = () => {
                     borderRadius: 2,
                     backgroundColor: themeColors[themeMode]?.bg || themeColors.light.bg,
                     color: themeColors[themeMode]?.color || themeColors.light.color,
+                    backdropFilter: "blur(8px)",
                   }}
                 >
                   <CardContent>
