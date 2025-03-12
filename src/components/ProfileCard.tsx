@@ -23,10 +23,10 @@ export default function ProfileCard() {
   };
 
   const contacts = [
-    { icon: <GitHubIcon fontSize="small" />, text: "github.com/daradanci", link: "https://github.com/daradanci" },
-    { icon: <TelegramIcon fontSize="small" />, text: "@daradanci", link: "https://t.me/daradanci" },
-    { icon: <LocalPhoneIcon fontSize="small" />, text: "+79013491799", link: "+79013491799" },
-    { icon: <EmailIcon fontSize="small" />, text: "daradanci@gmail.com", link: "daradanci@gmail.com" }
+    { icon: <GitHubIcon fontSize="small" />, text: "github.com/daradanci", link: "https://github.com/daradanci", isLink: true },
+    { icon: <TelegramIcon fontSize="small" />, text: "@daradanci", link: "https://t.me/daradanci", isLink: true },
+    { icon: <LocalPhoneIcon fontSize="small" />, text: "+79013491799", link: "+79013491799", isLink: false },
+    { icon: <EmailIcon fontSize="small" />, text: "daradanci@gmail.com", link: "daradanci@gmail.com", isLink: false }
   ];
 
   return (
@@ -43,44 +43,51 @@ export default function ProfileCard() {
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
         }}
       >
-        <Typography variant="h4" sx={{fontSize:{xs: "30px", md: "34px"}}}>Привет! Я – фронтендер daradanci.</Typography>
+        <Typography variant="h4" sx={{ fontSize: { xs: "30px", md: "34px" } }}>Привет! Я – фронтендер daradanci.</Typography>
         <Typography variant="subtitle1">Помогаю создавать удобные и эффективные веб-приложения.</Typography>
         <Typography variant="subtitle1">Если у вас есть интересный проект — свяжитесь со мной!</Typography>
 
-        {/* Контакты в виде таблицы */}
         <TableContainer>
           <Table size="small">
             <TableBody>
               {[0, 2].map((i) => (
                 <TableRow key={i}>
-                  <TableCell align="center" sx={{ color: themeColors[themeMode]?.color || themeColors.light.color }}>
-                    <IconButton color="inherit" onClick={() => copyToClipboard(contacts[i].link)}>
-                      {contacts[i].icon}
-                    </IconButton>
-                    <Typography 
-                      variant="body2" 
-                      onClick={() => copyToClipboard(contacts[i].link)} 
-                      sx={{ cursor: "pointer", color: themeColors[themeMode]?.color || themeColors.light.color }}
-                    >
-                      {contacts[i].text}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center" sx={{ color: themeColors[themeMode]?.color || themeColors.light.color }}>
-                    {contacts[i + 1] && (
-                      <>
-                        <IconButton color="inherit" onClick={() => copyToClipboard(contacts[i + 1].link)}>
-                          {contacts[i + 1].icon}
+                  {[contacts[i], contacts[i + 1]].map((contact, index) => (
+                    <TableCell key={index} align="center" sx={{ color: themeColors[themeMode]?.color || themeColors.light.color }}>
+                      {contact?.isLink ? (
+                        <IconButton color="inherit" component="a" href={contact.link} target="_blank" rel="noopener noreferrer">
+                          {contact.icon}
                         </IconButton>
-                        <Typography 
-                          variant="body2" 
-                          onClick={() => copyToClipboard(contacts[i + 1].link)} 
-                          sx={{ cursor: "pointer", color: themeColors[themeMode]?.color || themeColors.light.color }}
-                        >
-                          {contacts[i + 1].text}
-                        </Typography>
-                      </>
-                    )}
-                  </TableCell>
+                      ) : (
+                        <IconButton color="inherit" onClick={() => copyToClipboard(contact.link)}>
+                          {contact.icon}
+                        </IconButton>
+                      )}
+                      <Typography 
+                        variant="body2"
+                        sx={{ 
+                          cursor: "pointer", 
+                          color: themeColors[themeMode]?.color || themeColors.light.color, 
+                          transition: "0.2s",
+                          '&:hover': {
+                            textDecoration: "underline"
+                          },
+                          '&:active': {
+                            transform: "scale(0.95)"
+                          }
+                        }}
+                      >
+                        {contact?.isLink ? (
+                          <a href={contact.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "inherit" }}>
+                            {contact.text}
+                          </a>
+                        ) : (
+                          <span onClick={() => copyToClipboard(contact.link)}>{contact.text}</span>
+                        )}
+                    </Typography>
+
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
