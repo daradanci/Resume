@@ -3,8 +3,13 @@ import { ThemeProviderWrapper } from "./context/ThemeContext";
 import ThemeToggle from "./components/ThemeToggle";
 import AnimatedBackground from "./components/backgrounds/AnimatedBackground";
 import Home from "./pages/Home";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    document.title = 'Моё портфолио';
+  }, []);
+
   return (
     <ThemeProviderWrapper>
       <Router basename="/Resume">
